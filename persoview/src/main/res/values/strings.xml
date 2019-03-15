@@ -1,0 +1,57 @@
+<resources>
+    <dimen name="content_with_image_movie_search">200dp</dimen>
+
+    <dimen name="height_image_movie_search">250dp</dimen>
+    <dimen name="title_movie">12sp</dimen>
+
+    <dimen name="date_movie">10dp</dimen>
+
+    <color name="trans">#00000000</color>
+
+    <color name="bg_black_060608">#060608</color>
+    <color name="bg_black_46464b">#46464b</color>
+    <color name="bg_black_60FFFFFF">#20FFFFFF</color>
+
+    <!-- C -->
+
+    <!-- G -->
+    <color name="bg_grey_cdcdcd">#cdcdcd</color>
+    <color name="bg_grey_fafbfd">#fafbfd</color>
+    <color name="bg_grey_cccdd1">#cccdd1</color>
+    <color name="bg_grey_b4b5b7">#b4b5b7</color>
+    <color name="bg_grey_f3f3f3">#f3f3f3</color>
+    <color name="bg_grey_b0b0b0">#b0b0b0</color>
+    <color name="bg_gray_b4b4b4">#b4b4b4</color>
+
+    <!-- R -->
+    <color name="bg_red_e3615f">#e3615f</color>
+    <color name="bg_red_b71b19">#b71b19</color>
+
+    <!-- W -->
+    <color name="bg_white_60ffffff">#60ffffff</color>
+
+
+
+
+    <string name="debug_name_user">Luis Hernandez</string>
+    <string name="debug_email">luisjhp93@gmail.com</string>
+    <string name="debug_name">Lucy</string>
+    <string name="debug_date">July 7,2017</string>
+    <string name="debug_date_2015">2015</string>
+    <string name="debug_mad_max">Mad Max FURY ROAD</string>
+    <string name="debug_data_extra">Action, Adventure Sci-Fi - 14 may 2015</string>
+    <string name="debug_ranking">4.2</string>
+    <string name="debug_comments">+200 comments</string>
+    <string name="debug_play">+200 reproducciones</string>
+    <string name="debug_lorem_ipsum">El científico Bruce Banner recorre el mundo tratando de encontrar una cura a su problema, en busca de un antídoto que le permita librarse de su Alter Ego. Perseguido por el ejército y por su propia rabia interna, es incapaz de sacar de su cabeza a Betty Ross. Así que se decide a volver a la civilización, donde debe enfrentarse a una criatura creada cuando el agente de la KGB, Emil Blonsky, se expone a una dosis superior de la radiación que convirtió a Bruce en Hulk. Incapaz de volver a su estado humano, Emil hace responsable a Hulk de su aterradora condición, mientras que la ciudad de Nueva York se convierte en el escenario de la última batalla entre las dos criaturas más poderosas que jamás han pisado la Tierra.</string>
+    <string name="debug_notifications_lorem_ipsum">El científico Bruce Banner recorre el mundo tratando de encontrar una cura a su problema, en busca de un antídoto que le permita librarse de su Alter Ego.</string>
+    <string name="debug_view">200</string>
+    <string name="debug_comments_list">40</string>
+    <string name="debug_category">Accion</string>
+    <string name="debug_news">\'Nace una estrella\': Bradley Coopper pasó cartro horas diarias transportando</string>
+    <string name="debug_create_at">14 agostro 2018</string>
+
+    <string name="admob_banner_1_id">ca-app-pub-8574684333182442/6253963100</string>
+
+    <string name="admob_id">ca-app-pub-8574684333182442~2366565275</string>
+</resources>
