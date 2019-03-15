@@ -44,6 +44,13 @@ public interface ClickMovieItem{
     void clickingItem(Movie m, int idmov);
 }
 
+    public interface ScrollCallbackFlip {
+
+        void onScrollEnded(int position);
+    }
+
+    private ScrollCallbackFlip scrollListener;
+
     public FliperAdapter(Context m, ArrayList<Movie> jas){
         this.mContext = m;
         this.movies = jas;
@@ -54,6 +61,10 @@ public interface ClickMovieItem{
 
 public void SetClickMovieListener(ClickMovieItem k){
     this.ll = k;
+}
+
+public void SetScrollListener(ScrollCallbackFlip lf){
+    this.scrollListener = lf;
 }
 
     @NonNull
@@ -87,6 +98,11 @@ public void SetClickMovieListener(ClickMovieItem k){
             holder.juas.setPageTransformer(true, horizontalTransformer);
             holder.juas.setCurrentItem(1);
             holder.isReady = true;
+
+
+            if (movies != null && scrollListener != null) {
+                scrollListener.onScrollEnded(position);
+            }
         }
 
 
