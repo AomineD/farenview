@@ -14,6 +14,16 @@ public class Movie {
 
     private String name;
 
+    public int getIdMovie() {
+        return idMovie;
+    }
+
+    public void setIdMovie(int idMovie) {
+        this.idMovie = idMovie;
+    }
+
+    private int idMovie;
+
     private String overview;
 
     public String getOverview() {
@@ -54,4 +64,14 @@ public class Movie {
 
     private String views;
     private String urlImg;
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    private String releaseDate;
 }

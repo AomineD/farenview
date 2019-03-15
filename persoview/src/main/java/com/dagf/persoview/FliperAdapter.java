@@ -40,10 +40,21 @@ private static ArrayList<Movie> movies;
 private static Context mContext;
 private ViewGroup vai;
 
+public interface ClickMovieItem{
+    void clickingItem(Movie m, int idmov);
+}
+
     public FliperAdapter(Context m, ArrayList<Movie> jas){
         this.mContext = m;
         this.movies = jas;
     }
+
+
+    private ClickMovieItem ll;
+
+public void SetClickMovieListener(ClickMovieItem k){
+    this.ll = k;
+}
 
     @NonNull
     @Override
@@ -71,10 +82,8 @@ private ViewGroup vai;
             ArrayList<Movie> two = new ArrayList<>();
             two.add(movie1);
             two.add(movie2);
-            holder.juas.setAdapter(new ViewPagerFlip(mContext, two));
-       //    AccordionTransformer horizontalTransformer = new AccordionTransformer();
+            holder.juas.setAdapter(new ViewPagerFlip(mContext, two, ll));
             StackTransformer horizontalTransformer = new StackTransformer();
-          //  BackgroundToForegroundTransformer horizontalTransformer = new BackgroundToForegroundTransformer();
             holder.juas.setPageTransformer(true, horizontalTransformer);
             holder.juas.setCurrentItem(1);
             holder.isReady = true;

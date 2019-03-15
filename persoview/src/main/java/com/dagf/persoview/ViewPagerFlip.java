@@ -26,11 +26,13 @@ public class ViewPagerFlip extends PagerAdapter {
     private ViewGroup MainView;
     private Context jaj;
     private ArrayList<Movie> wachau;
+    private FliperAdapter.ClickMovieItem listener;
 
-    public ViewPagerFlip(Context mmm, ArrayList<Movie> m){
+    public ViewPagerFlip(Context mmm, ArrayList<Movie> m, FliperAdapter.ClickMovieItem clickMovieItem){
 
                 // MainView.setVisibility(View.GONE);
         this.wachau = m;
+        this.listener = clickMovieItem;
                  this.jaj = mmm;
     }
 
@@ -161,16 +163,34 @@ private void fillMerger(Movie movie, MergeHolder holder){
         FliperAdapter.Halder holder = new FliperAdapter.Halder(vau, true);
 
 
-        Movie movie1 = wachau.get(0);
+        final Movie movie1 = wachau.get(0);
         Movie movie2 = null;
 
         movie2 = wachau.get(1);
 
         holder.title.setText(movie1.getName());
+        holder.jasone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.clickingItem(movie1, movie1.getIdMovie());
+            }
+        });
+
+        holder.date.setText(movie1.getReleaseDate());
+        holder.viewer.setText(movie1.getViews());
         Picasso.get().load(Uri.parse(movie1.getUrlImg())).fit().into(holder.image);
         if (movie2 != null) {
+            final Movie mm = movie2;
             holder.title2.setText(movie2.getName());
             Picasso.get().load(Uri.parse(movie2.getUrlImg())).fit().into(holder.image2);
+            holder.date2.setText(movie2.getReleaseDate());
+            holder.viewer2.setText(movie2.getViews());
+            holder.jastwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.clickingItem(mm, mm.getIdMovie());
+                }
+            });
         } else {
           //  Log.e("MAIN", "instantiateItem: SI OCULTO");
             holder.jastwo.setVisibility(View.GONE);
