@@ -130,9 +130,16 @@ if(wachau.get(1) != null) {
 // =================================== LLENAR VIEWS MERGER ======================================== //
 // ======================================================================================== //
 
-private void fillMerger(Movie movie, MergeHolder holder){
+private void fillMerger(final Movie movie, MergeHolder holder){
 
         holder.title_d.setText(movie.getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.clickingItem(movie, movie.getIdMovie());
+            }
+        });
 
         Picasso.get().load(Uri.parse(movie.getUrlImg())).transform(new CropCircleTransformation()).into(holder.round);
 
