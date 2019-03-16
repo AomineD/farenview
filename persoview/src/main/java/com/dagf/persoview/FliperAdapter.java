@@ -41,7 +41,7 @@ private static Context mContext;
 private ViewGroup vai;
 
 public interface ClickMovieItem{
-    void clickingItem(Movie m, int idmov);
+    void clickingItem(Movie m, String idmov);
 }
 
     public interface ScrollCallbackFlip {
