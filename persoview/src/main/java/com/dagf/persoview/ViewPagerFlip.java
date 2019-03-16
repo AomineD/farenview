@@ -16,10 +16,14 @@ import android.widget.TextView;
 
 import com.dagf.persoview.models.Movie;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import jp.wasabeef.picasso.transformations.BlurTransformation;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class ViewPagerFlip extends PagerAdapter {
 
@@ -113,12 +117,14 @@ if(wachau.get(1) != null) {
         LinearLayout mainlins;
         TextView ov;
         TextView ov_title;
+        ImageView backing;
 
 
         public MergeHolder(@NonNull View itemView) {
             super(itemView);
             title_d = itemView.findViewById(R.id.title_jajas);
             round = itemView.findViewById(R.id.ptg);
+            backing = itemView.findViewById(R.id.background);
 
             ov = itemView.findViewById(R.id.ov_desc);
             ov_title = itemView.findViewById(R.id.ov_title);
@@ -143,6 +149,13 @@ private void fillMerger(final Movie movie, MergeHolder holder){
             });
 
             Picasso.get().load(Uri.parse(movie.getUrlImg())).transform(new CropCircleTransformation()).into(holder.round);
+
+            List<Transformation> adsd = new ArrayList<>();
+
+            adsd.add(new BlurTransformation(jaj, 12, 5));
+            adsd.add(new RoundedCornersTransformation(12, 1));
+
+            Picasso.get().load(Uri.parse(movie.getUrlImg())).fit().transform(adsd).into(holder.backing);
 
             holder.ov.setText(movie.getOverview());
 
