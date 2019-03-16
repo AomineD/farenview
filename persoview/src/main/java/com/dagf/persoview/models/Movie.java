@@ -14,15 +14,15 @@ public class Movie {
 
     private String name;
 
-    public int getIdMovie() {
+    public String getIdMovie() {
         return idMovie;
     }
 
-    public void setIdMovie(int idMovie) {
+    public void setIdMovie(String idMovie) {
         this.idMovie = idMovie;
     }
 
-    private int idMovie;
+    private String idMovie;
 
     private String overview;
 
