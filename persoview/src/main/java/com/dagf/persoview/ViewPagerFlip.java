@@ -132,32 +132,36 @@ if(wachau.get(1) != null) {
 
 private void fillMerger(final Movie movie, MergeHolder holder){
 
-        holder.title_d.setText(movie.getName());
+        if(movie != null) {
+            holder.title_d.setText(movie.getName());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.clickingItem(movie, movie.getIdMovie());
+            holder.round.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.clickingItem(movie, movie.getIdMovie());
+                }
+            });
+
+            Picasso.get().load(Uri.parse(movie.getUrlImg())).transform(new CropCircleTransformation()).into(holder.round);
+
+            holder.ov.setText(movie.getOverview());
+
+            for (int i = 0; i < movie.getNameGenres().size(); i++) {
+                View vv = LayoutInflater.from(jaj).inflate(R.layout.textsimple, MainView, false);
+
+                TextView genre = vv.findViewById(R.id.texting);
+
+                genre.setText(movie.getNameGenres().get(i));
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                params.setMargins(15, 0, 15, 0);
+
+                holder.mainlins.addView(vv, params);
+
             }
-        });
-
-        Picasso.get().load(Uri.parse(movie.getUrlImg())).transform(new CropCircleTransformation()).into(holder.round);
-
-        holder.ov.setText(movie.getOverview());
-
-        for(int i=0; i < movie.getNameGenres().size(); i++){
-            View vv = LayoutInflater.from(jaj).inflate(R.layout.textsimple, MainView, false);
-
-          TextView genre =  vv.findViewById(R.id.texting);
-
-          genre.setText(movie.getNameGenres().get(i));
-
-          LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-          params.setMargins(15, 0, 15, 0);
-
-          holder.mainlins.addView(vv, params);
-
+        }else{
+            holder.itemView.setVisibility(View.GONE);
         }
 
     }
@@ -174,35 +178,38 @@ private void fillMerger(final Movie movie, MergeHolder holder){
         Movie movie2 = null;
 
         movie2 = wachau.get(1);
+if(movie1 !=null) {
+    holder.title.setText(movie1.getName());
+    holder.jasone.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            listener.clickingItem(movie1, movie1.getIdMovie());
+        }
+    });
 
-        holder.title.setText(movie1.getName());
-        holder.jasone.setOnClickListener(new View.OnClickListener() {
+    holder.date.setText(movie1.getReleaseDate());
+    holder.viewer.setText(movie1.getViews());
+    Picasso.get().load(Uri.parse(movie1.getUrlImg())).fit().into(holder.image);
+    if (movie2 != null) {
+        final Movie mm = movie2;
+        holder.title2.setText(movie2.getName());
+        Picasso.get().load(Uri.parse(movie2.getUrlImg())).fit().into(holder.image2);
+        holder.date2.setText(movie2.getReleaseDate());
+        holder.viewer2.setText(movie2.getViews());
+        holder.jastwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.clickingItem(movie1, movie1.getIdMovie());
+                listener.clickingItem(mm, mm.getIdMovie());
             }
         });
-
-        holder.date.setText(movie1.getReleaseDate());
-        holder.viewer.setText(movie1.getViews());
-        Picasso.get().load(Uri.parse(movie1.getUrlImg())).fit().into(holder.image);
-        if (movie2 != null) {
-            final Movie mm = movie2;
-            holder.title2.setText(movie2.getName());
-            Picasso.get().load(Uri.parse(movie2.getUrlImg())).fit().into(holder.image2);
-            holder.date2.setText(movie2.getReleaseDate());
-            holder.viewer2.setText(movie2.getViews());
-            holder.jastwo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.clickingItem(mm, mm.getIdMovie());
-                }
-            });
-        } else {
-          //  Log.e("MAIN", "instantiateItem: SI OCULTO");
-            holder.jastwo.setVisibility(View.GONE);
-            holder.none.setVisibility(View.VISIBLE);
-        }
+    } else {
+        //  Log.e("MAIN", "instantiateItem: SI OCULTO");
+        holder.jastwo.setVisibility(View.GONE);
+        holder.none.setVisibility(View.VISIBLE);
+    }
+}else{
+    holder.itemView.setVisibility(View.GONE);
+}
 
     }
 

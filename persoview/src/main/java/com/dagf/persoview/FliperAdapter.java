@@ -34,10 +34,10 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
-public class FliperAdapter extends RecyclerView.Adapter<FliperAdapter.Halder> {
+public class FliperAdapter extends RecyclerView.Adapter<FliperAdapter.ViewHol> {
 
-private static ArrayList<Movie> movies;
-private static Context mContext;
+private ArrayList<Movie> movies;
+private Context mContext;
 private ViewGroup vai;
 
 public interface ClickMovieItem{
@@ -52,8 +52,8 @@ public interface ClickMovieItem{
     private ScrollCallbackFlip scrollListener;
 
     public FliperAdapter(Context m, ArrayList<Movie> jas){
-        this.mContext = m;
-        this.movies = jas;
+        mContext = m;
+        movies = jas;
     }
 
 
@@ -69,26 +69,31 @@ public void SetScrollListener(ScrollCallbackFlip lf){
 
     @NonNull
     @Override
-    public Halder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHol onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         this.vai = viewGroup;
-        View view = LayoutInflater.from(mContext).inflate(R.layout.itemsitobb, viewGroup, false);
-
-        return new Halder(view, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.itemview, viewGroup, false);
+        //Log.e("MAIN", "onCreateViewHolder: "+i);
+        return new ViewHol(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Halder holder, int position) {
-
-
-
-
-        Movie movie1 = movies.get(position * 2);
+    public void onBindViewHolder(@NonNull ViewHol holder, int position) {
+Movie movie1 = null;
         Movie movie2 = null;
 
+
+
+        if(position * 2 < movies.size()) {
+            movie1 = movies.get(position * 2);
+
+
             movie2 = movies.size() > (position * 2 + 1) ? movies.get(position * 2 + 1) : null;
+        } else if((position * 2) - 1 < movies.size()){
+            Log.e("MAIN", "onBindViewHolder: "+(position * 2 - 1)+" SIZE  --> "+movies.size());
+            movie1 = movies.get((position * 2) - 1);
 
-
-        if(!holder.isReady) {
+        }
+        if(movie1 != null) {
 
             ArrayList<Movie> two = new ArrayList<>();
             two.add(movie1);
@@ -97,12 +102,16 @@ public void SetScrollListener(ScrollCallbackFlip lf){
             StackTransformer horizontalTransformer = new StackTransformer();
             holder.juas.setPageTransformer(true, horizontalTransformer);
             holder.juas.setCurrentItem(1);
-            holder.isReady = true;
 
 
             if (movies != null && scrollListener != null) {
                 scrollListener.onScrollEnded(position);
             }
+            Log.e("MAIN", "onBindViewHolder: "+(position)+" -> "+getItemCount());
+        }else{
+            Log.e("MAIN", "onBindViewHolder: CAUNT = "+getItemCount()+" <---> "+position);
+            //Log.e("MAIN", "onBindViewHolder: "+movies.get(position * 2 - 1)+" POS = "+position+", isnull = "+(movie1 == null));
+           // holder.itemView.setVisibility(View.GONE);
         }
 
 
@@ -111,7 +120,7 @@ public void SetScrollListener(ScrollCallbackFlip lf){
 
     @Override
     public int getItemCount() {
-        return movies.size() % 2 == 0 ? movies.size():(movies.size() / 2)+1;
+        return movies.size() % 2 == 0 ? movies.size() / 2:(movies.size() / 2)+1;
     }
 
   public static class Halder extends RecyclerView.ViewHolder{
@@ -132,7 +141,7 @@ public void SetScrollListener(ScrollCallbackFlip lf){
 
         // ======================== MERGES =========================== //
          View merg;
-         ViewPager juas;
+
 
          View mainc;
 
@@ -176,11 +185,20 @@ public void SetScrollListener(ScrollCallbackFlip lf){
             movie2 = itemView.findViewById(R.id.movie2);
             jastwo = itemView.findViewById(R.id.viw2);
 
-            if(!isf){
+
+
+        }
+    }
+
+    class ViewHol extends RecyclerView.ViewHolder{
+
+        ViewPager juas;
+
+        public ViewHol(@NonNull View itemView) {
+            super(itemView);
+
                 juas = itemView.findViewById(R.id.viewpag);
-                jastwo.setVisibility(View.GONE);
-                jasone.setVisibility(View.GONE);
-            }
+
 
         }
     }
@@ -189,28 +207,5 @@ public void SetScrollListener(ScrollCallbackFlip lf){
 
     // ========================== PAGER TRANSFORMER PAPUUU ===================================== //
 
-    public class CardTransformer implements ViewPager.PageTransformer {
-
-        private final float scalingStart;
-
-        public CardTransformer(float scalingStart) {
-            super();
-            this.scalingStart = 1 - scalingStart;
-        }
-
-        @Override
-        public void transformPage(View page, float position) {
-
-            if (position >= 0) {
-                final int w = page.getWidth();
-                float scaleFactor = 1 - scalingStart * position;
-               // Log.e("MAIN", "transformPage: "+scaleFactor+" pos "+position);
-                page.setAlpha(1 - position);
-                page.setScaleX(scaleFactor);
-                page.setScaleY(scaleFactor);
-                page.setTranslationX(w * (1 - position) - w);
-            }
-        }
-    }
 
 }
